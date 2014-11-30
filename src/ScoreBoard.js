@@ -14,22 +14,23 @@ ScoreBoard.prototype.shouldABonusApply= function() {
   return this.previousFrameStatus == "Normal" ? false : true;  
 };
 
-// // ScoreBoard.prototype.applyBonus = function() {
-//   if(this.previousFrameStatus == "Spare") {
-//     this.firstRollBonusMultiplier = 2;
-//   }
-//   else if(this.previousFrameStatus == "Strike") {
-//     this.firstRollBonusMultiplier = 1;
-//     this.secondRollBonusMultiplier = 1;
-//   }
-//   else {
-//   }
-// };
+ScoreBoard.prototype.bonusMultiplier= function() {
+  if(this.previousFrameStatus == "Spare") {
+    this.firstRollBonusMultiplier = 2;
+  }
+  else if(this.previousFrameStatus == "Strike") {
+    this.firstRollBonusMultiplier = 2;
+    this.secondRollBonusMultiplier = 2;
+  }
+  else {
+  }
+};
 
 ScoreBoard.prototype.calculateRunningTotal = function(frame, cumulative) {
   if(this.shouldABonusApply()) {
-    this.score = 100;
-    // this bit needs finalising.
+    this.bonusMultiplier();
+    console.log(this.firstRollBonusMultiplier);
+    this.score = (frame.rollHolder[0].hitPins * this.firstRollBonusMultiplier) + (frame.rollHolder[1].hitPins * this.secondRollBonusMultiplier) + cumulative;
   }
   else {
     this.score = frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins + cumulative;
