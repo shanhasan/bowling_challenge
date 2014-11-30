@@ -45,6 +45,7 @@ describe("ScoreBoard", function() {
   });
 
   it('should recognise if a bonus is going to be applied to the current round', function() {
+    expect(board.shouldABonusApply()).toBe(false);
     roll1.attempt(10);
     frame.storeRoll(roll1);
     board.storeFrame(frame);
@@ -97,8 +98,8 @@ describe("ScoreBoard", function() {
     roll1.attempt(10);
     frame.storeRoll(roll1);
     board.storeFrame(frame);
-    board.storeFrameStatusForNextRound(frame);
     board.calculateRunningTotal(frame);
+    board.storeFrameStatusForNextRound(frame);
     board.updateScoreDisplay(frame);
     expect(board.displayScore).toEqual("X");
 
@@ -110,8 +111,8 @@ describe("ScoreBoard", function() {
     roll2.attempt(9);
     frame.storeRoll(roll2);
     board.storeFrame(frame);
-    board.storeFrameStatusForNextRound(frame);
     board.calculateRunningTotal(frame);
+    board.storeFrameStatusForNextRound(frame);
     board.updateScoreDisplay(frame);
     expect(board.displayScore).toEqual("/");
   });
@@ -122,8 +123,8 @@ describe("ScoreBoard", function() {
     roll2.attempt(6);
     frame.storeRoll(roll2);
     board.storeFrame(frame);
-    board.storeFrameStatusForNextRound(frame);
     board.calculateRunningTotal(frame);
+    board.storeFrameStatusForNextRound(frame);
     board.updateScoreDisplay(frame);
     expect(board.displayScore).toEqual(7);
   });
