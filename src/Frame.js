@@ -3,7 +3,16 @@ function Frame() {
 };
 
 Frame.prototype.storeRoll = function(roll) {
-  this.rollHolder.push(roll);  
+  if(roll.hitPins == 10) {
+  	this.rollHolder.push(roll); 
+  	var blankRoll = new Roll;
+  	blankRoll.attempt(0);
+  	this.rollHolder.push(blankRoll);
+	}
+  else
+	{
+ 	this.rollHolder.push(roll);  
+	}
 };
 
 Frame.prototype.isAStrike = function() {

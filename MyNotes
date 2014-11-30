@@ -1,0 +1,37 @@
+My Notes
+
+
+- you start out with
+
+    board = new ScoreBoard();
+    frame = new Frame();
+    frame2 = new Frame();
+    roll1 = new Roll();
+    roll2 = new Roll();
+
+
+- you roll
+	roll.attempt();
+	frame.storeRoll(roll1);
+
+- you roll again (unless strike, second roll.hitPins = 0)
+	roll.attempt();
+	frame.storeRoll(roll2);
+
+- a frame concludes
+	board.storeFrame(frame);
+
+- we need to check if this frame was a strike, spare, or normal
+- we need to recognise this now and store the frame's status
+	board.storeFrameStatusForNextRound(frame);
+
+- we need to calculate the basic points scored in this frame for the pins hit in this frame
+- these will need to be incremented if a bonus was awarded from the previous frame
+	board.calculateRunningTotal(frame);
+
+- we should now consider if we can output that result now
+
+
+
+
+     
