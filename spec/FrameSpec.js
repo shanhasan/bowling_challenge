@@ -18,10 +18,19 @@ describe("Frame", function() {
       expect(frame.isAStrike()).toBe(true);
     });
 
+    it('should know if it is a spare', function() {
+      roll1.attempt(5);
+      frame.storeRoll(roll1);
+      roll2.attempt(5);
+      frame.storeRoll(roll2);
+      expect(frame.isASpare()).toBe(true);
+    });
 
-
-
-//    Should consist of two rolls
-// Should know if it represents a "strike", "spare", or "normal" round
-
+    it('should know if it is neither a spare nor a strike', function() {
+      roll1.attempt(2);
+      frame.storeRoll(roll1);
+      roll2.attempt(3);
+      frame.storeRoll(roll2);
+      expect(frame.isNormal()).toBe(true);
+    });
 });
