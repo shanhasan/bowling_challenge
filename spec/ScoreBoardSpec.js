@@ -44,14 +44,14 @@ describe("ScoreBoard", function() {
     expect(board.FrameStatus).toEqual("Strike");
   });
 
-  it('should recognise if a bonus needs to apply to a frame', function() {
-    expect(board.shouldABonusApply()).toBe(false);
-    roll1.attempt(10);
-    frame.storeRoll(roll1);
-    board.storeFrame(frame);
-    board.storeFrameStatus(frame);
-    expect(board.shouldABonusApply()).toBe(true);
-  });
+  // it('should recognise if a bonus needs to apply to a frame', function() {
+  //   expect(board.shouldABonusApply()).toBe(false);
+  //   roll1.attempt(10);
+  //   frame.storeRoll(roll1);
+  //   board.storeFrame(frame);
+  //   board.storeFrameStatus(frame);
+  //   expect(board.shouldABonusApply()).toBe(true);
+  // });
 
   it('should display "X" as the current score if the previous round finished a strike', function() {
     roll1.attempt(10);
@@ -86,7 +86,22 @@ describe("ScoreBoard", function() {
     expect(board.displayScore).toEqual(7);
   });
 
-
-
+  it('should be able to calculate a bonus in the event of a spare', function() {
+    roll1.attempt(5);
+    frame.storeRoll(roll1);
+    roll2.attempt(5);
+    frame.storeRoll(roll2);
+    board.storeFrame(frame);
+    board.storeFrameStatus(frame);
+    board.storePinsHit(frame);
+    roll3.attempt(7);
+    frame2.storeRoll(roll3);
+    roll4.attempt(1);
+    frame2.storeRoll(roll4);
+    board.storeFrame(frame2);
+    board.calculateSpareBonus(frame2);
+    expect(board.frameBonus[0]).toEqual(7);
+    
+  });
 
 });
