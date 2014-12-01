@@ -34,7 +34,7 @@ ScoreBoard.prototype.storePinsHit = function(frame) {
   else {
     this.frameTotalPinsHit.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
     this.frameBonus.push(0);
-    this.cumulativeScore = this.frameTotalPinsHit + cumulativeScore;
+    this.cumulativeScore = this.frameTotalPinsHit[this.frameTotalPinsHit.length-1] + this.cumulativeScore;
   }
 };
 
