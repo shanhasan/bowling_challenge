@@ -16,7 +16,7 @@ describe("Frame", function() {
       roll1.attempt(10);
       frame.storeRoll(roll1);
       expect(frame.rollHolder.length).toEqual(2);
-      expect(frame.rollHolder[1]).toEqual(0);
+      expect(frame.rollHolder[1].hitPins).toEqual(0);
   });
 
   it('should know if it is a strike', function() {

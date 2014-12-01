@@ -1,63 +1,52 @@
 function ScoreBoard() {
   this.frameHolder = new Array();
-  this.previousFrameStatus = "Normal";
-  this.score = 0;
-  this.firstRollBonusMultiplier = 1;
-  this.secondRollBonusMultiplier = 1;
+  this.FrameStatus = "Normal";
+  this.frameTotalPinsHit = new Array();
+  this.frameBonus = new Array();
   this.displayScore = 0;
+  this.cumulativeScore = 0;
 };
 
 ScoreBoard.prototype.storeFrame = function(frame) {
   this.frameHolder.push(frame);  
 };
 
-ScoreBoard.prototype.storeFrameStatusForNextRound = function(frame) {
+ScoreBoard.prototype.storeFrameStatus = function(frame) {
   if(frame.isAStrike()) {
-    this.previousFrameStatus = "Strike";
+    this.FrameStatus = "Strike";
   }
   else if (frame.isASpare()) {
-    this.previousFrameStatus = "Spare";
+    this.FrameStatus = "Spare";
   }
   else {
-    this.previousFrameStatus = "Normal";
+    this.FrameStatus = "Normal";
   }
 };
 
 ScoreBoard.prototype.shouldABonusApply= function() {
-  return this.previousFrameStatus == "Normal" ? false : true;  
+  return this.FrameStatus == "Normal" ? false : true;  
 };
 
-ScoreBoard.prototype.bonusMultiplier= function() {
-  if(this.previousFrameStatus == "Spare") {
-    this.firstRollBonusMultiplier = 2;
-  }
-  else if(this.previousFrameStatus == "Strike") {
-    this.firstRollBonusMultiplier = 2;
-    this.secondRollBonusMultiplier = 2;
-  }
-  else {
-  }
-};
-
-ScoreBoard.prototype.calculateRunningTotal = function(frame) {
+ScoreBoard.prototype.storePinsHit = function(frame) {
   if(this.shouldABonusApply()) {
-    this.bonusMultiplier();
-    this.score = (frame.rollHolder[0].hitPins * this.firstRollBonusMultiplier) + (frame.rollHolder[1].hitPins * this.secondRollBonusMultiplier) + this.score;
+    this.frameTotalPinsHit.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
   }
   else {
-    this.score = frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins + this.score;
+    this.frameTotalPinsHit.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
+    this.frameBonus.push(0);
+    this.cumulativeScore = this.frameTotalPinsHit + cumulativeScore;
   }
 };
 
 ScoreBoard.prototype.updateScoreDisplay = function(frame) {
-  if(this.previousFrameStatus == "Strike") {
+  if(this.FrameStatus == "Strike") {
     this.displayScore = "X";
   }
-  else if (this.previousFrameStatus == "Spare") {
+  else if (this.FrameStatus == "Spare") {
     this.displayScore = "/";
   }
   else {
-    this.displayScore = this.score;
+    this.displayScore = this.cumulativeScore;
   }
 };
 
