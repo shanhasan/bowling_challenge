@@ -23,18 +23,26 @@ ScoreBoard.prototype.storeFrameStatus = function(frame) {
   }
 };
 
-ScoreBoard.prototype.shouldABonusApply= function() {
-  return this.FrameStatus == "Normal" ? false : true;  
-};
+// ScoreBoard.prototype.shouldABonusApply = function() {
+//   return this.FrameStatus == "Normal" ? false : true;  
+// };
 
 ScoreBoard.prototype.storePinsHit = function(frame) {
-  if(this.shouldABonusApply()) {
+  if(this.FrameStatus== "Strike" || this.FrameStatus== "Spare") {
     this.frameTotalPinsHit.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
   }
   else {
     this.frameTotalPinsHit.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
     this.frameBonus.push(0);
     this.cumulativeScore = this.frameTotalPinsHit[this.frameTotalPinsHit.length-1] + this.cumulativeScore;
+  }
+};
+
+ScoreBoard.prototype.calculateSpareBonus = function(frame) {
+  if(this.FrameStatus == "Spare") {
+    this.frameBonus.push(frame.rollHolder[0].hitPins);
+    console.log(this.frameBonus);
+
   }
 };
 
