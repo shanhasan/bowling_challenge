@@ -1,0 +1,60 @@
+My Notes
+
+
+- you start out with
+
+    board = new ScoreBoard();
+    frame = new Frame();
+    frame2 = new Frame();
+    roll1 = new Roll();
+    roll2 = new Roll();
+
+
+- you roll
+	roll.attempt();
+	frame.storeRoll(roll1);
+
+- you roll again (unless strike, second roll.hitPins = 0)
+	roll.attempt();
+	frame.storeRoll(roll2);
+
+- a frame concludes
+	board.storeFrame(frame);
+
+- we need to check if this frame was a strike, spare, or normal
+- we now need to consider this frame's status
+- was a strike or spare achieved?
+- that way, we know if a bonus will need to be applied
+  board.storeFrameStatus(frame);
+
+
+
+
+
+
+
+- we need to calculate the basic points scored in this frame for the pins hit in this frame
+- these will need to be incremented if a bonus was awarded from the previous frame
+- we need to recognise this now and store it
+	board.calculateRunningTotal(frame);
+
+
+
+- we should now consider if we can output that result now
+- i.e. if a bonus will apply, we technically shouldn't output
+- since we cannot calculate until the next round has been played
+	board.updateScoreDisplay
+
+
+
+- this can run for 9 frames
+
+- need to check this
+
+- might be more intuitive to align the bonus to the frame retrospectively 
+- and in the wording
+- check how to get the perfect 300
+- separate pins hit from bonus
+
+- need to run Frame 10
+     
