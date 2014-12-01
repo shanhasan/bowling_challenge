@@ -28,6 +28,15 @@ ScoreBoard.prototype.calculateSpareBonus = function(frame) {
   }
 };
 
+ScoreBoard.prototype.calculateStrikeBonus = function(frame) {
+  if(this.frameHolder[this.frameHolder.length-1].isAStrike()) {
+    this.frameBonus.push(frame.rollHolder[0].hitPins);
+    if(this.frameBonus.length > 1) {
+      this.frameBonus[this.frameBonus.length-2] = this.frameBonus[this.frameBonus.length-2] + frame.rollHolder[0].hitPins;
+    }
+  }
+};
+
 ScoreBoard.prototype.updateScoreDisplay = function(frame) {
   if(frame.isAStrike()) {
     this.displayScore = "X";
