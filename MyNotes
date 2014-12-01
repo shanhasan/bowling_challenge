@@ -26,17 +26,18 @@ My Notes
 - was a strike or spare achieved?
 - that way, we know if a bonus will need to be applied
   board.storeFrameStatus(frame);
-
-
-
-
-
+  * (can now calculate any bonus for previous frame)
 
 
 - we need to calculate the basic points scored in this frame for the pins hit in this frame
-- these will need to be incremented if a bonus was awarded from the previous frame
 - we need to recognise this now and store it
-	board.calculateRunningTotal(frame);
+	board.storePinsHit(frame);
+
+
+- we now need to see if a bonus should be calculated for the previous frame
+- i think that would be called after the next frame has been stored
+- i.e. where there is a * above
+
 
 
 
