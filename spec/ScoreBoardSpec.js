@@ -1,5 +1,7 @@
 describe("ScoreBoard", function() {
 
+  var board, frame, frame2, roll1, roll2, roll3, roll4;
+
   beforeEach(function() {
     board = new ScoreBoard();
     frame = new Frame();
@@ -24,40 +26,10 @@ describe("ScoreBoard", function() {
     expect(board.cumulativeScore).toEqual(7);
   });
 
-  it('should recognise if a spare has been achieved', function() {
-    expect(board.FrameStatus).toEqual("Normal");
-    roll1.attempt(5);
-    frame.storeRoll(roll1);
-    roll2.attempt(5);
-    frame.storeRoll(roll2);
-    board.storeFrame(frame);
-    board.storeFrameStatus(frame);
-    expect(board.FrameStatus).toEqual("Spare");
-  });
-
-  it('should recognise if a strike has been achieved', function() {
-    expect(board.FrameStatus).toEqual("Normal");
-    roll1.attempt(10);
-    frame.storeRoll(roll1);
-    board.storeFrame(frame);
-    board.storeFrameStatus(frame);
-    expect(board.FrameStatus).toEqual("Strike");
-  });
-
-  // it('should recognise if a bonus needs to apply to a frame', function() {
-  //   expect(board.shouldABonusApply()).toBe(false);
-  //   roll1.attempt(10);
-  //   frame.storeRoll(roll1);
-  //   board.storeFrame(frame);
-  //   board.storeFrameStatus(frame);
-  //   expect(board.shouldABonusApply()).toBe(true);
-  // });
-
   it('should display "X" as the current score if the previous round finished a strike', function() {
     roll1.attempt(10);
     frame.storeRoll(roll1);
     board.storeFrame(frame);
-    board.storeFrameStatus(frame);
     board.updateScoreDisplay(frame);
     expect(board.displayScore).toEqual("X");
 
@@ -69,7 +41,6 @@ describe("ScoreBoard", function() {
     roll2.attempt(9);
     frame.storeRoll(roll2);
     board.storeFrame(frame);
-    board.storeFrameStatus(frame);
     board.updateScoreDisplay(frame);
     expect(board.displayScore).toEqual("/");
   });
@@ -81,7 +52,6 @@ describe("ScoreBoard", function() {
     frame.storeRoll(roll2);
     board.storeFrame(frame);
     board.storePinsHit(frame);
-    board.storeFrameStatus(frame);
     board.updateScoreDisplay(frame);
     expect(board.displayScore).toEqual(7);
   });
@@ -92,16 +62,22 @@ describe("ScoreBoard", function() {
     roll2.attempt(5);
     frame.storeRoll(roll2);
     board.storeFrame(frame);
-    board.storeFrameStatus(frame);
     board.storePinsHit(frame);
     roll3.attempt(7);
     frame2.storeRoll(roll3);
     roll4.attempt(1);
     frame2.storeRoll(roll4);
-    board.storeFrame(frame2);
     board.calculateSpareBonus(frame2);
     expect(board.frameBonus[0]).toEqual(7);
-    
   });
+
+// it('should recognise if a bonus needs to apply to a frame', function() {
+  //   expect(board.shouldABonusApply()).toBe(false);
+  //   roll1.attempt(10);
+  //   frame.storeRoll(roll1);
+  //   board.storeFrame(frame);
+  //   board.storeFrameStatus(frame);
+  //   expect(board.shouldABonusApply()).toBe(true);
+  // });
 
 });

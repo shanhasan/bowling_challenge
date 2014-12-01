@@ -10,22 +10,22 @@ Frame.prototype.storeRoll = function(roll) {
   	this.rollHolder.push(blankRoll);
 	}
   else
-	{
- 	this.rollHolder.push(roll);  
+	 {
+ 	  this.rollHolder.push(roll);  
 	}
 };
 
 Frame.prototype.isAStrike = function() {
-  return this.rollHolder[0].hitPins == 10 ? true : false;
+  return this.rollHolder[0].hitPins == 10;
 };
 
 Frame.prototype.isASpare = function() {
   if(!this.isAStrike()) {
-   return this.rollHolder[0].hitPins + this.rollHolder[1].hitPins == 10 ? true : false;
+   return this.rollHolder[0].hitPins + this.rollHolder[1].hitPins == 10;
   }
 };
 
 Frame.prototype.isNormal = function() {
-  return this.isASpare() == false ? true : false;
+  return this.isASpare() == false;
 };
 

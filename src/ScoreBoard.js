@@ -1,6 +1,6 @@
 function ScoreBoard() {
   this.frameHolder = new Array();
-  this.FrameStatus = "Normal";
+  // this.FrameStatus = "Normal";
   this.frameTotalPinsHit = new Array();
   this.frameBonus = new Array();
   this.displayScore = 0;
@@ -11,24 +11,8 @@ ScoreBoard.prototype.storeFrame = function(frame) {
   this.frameHolder.push(frame);  
 };
 
-ScoreBoard.prototype.storeFrameStatus = function(frame) {
-  if(frame.isAStrike()) {
-    this.FrameStatus = "Strike";
-  }
-  else if (frame.isASpare()) {
-    this.FrameStatus = "Spare";
-  }
-  else {
-    this.FrameStatus = "Normal";
-  }
-};
-
-// ScoreBoard.prototype.shouldABonusApply = function() {
-//   return this.FrameStatus == "Normal" ? false : true;  
-// };
-
 ScoreBoard.prototype.storePinsHit = function(frame) {
-  if(this.FrameStatus== "Strike" || this.FrameStatus== "Spare") {
+  if(frame.isAStrike() || frame.isASpare() ) {
     this.frameTotalPinsHit.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
   }
   else {
@@ -39,18 +23,16 @@ ScoreBoard.prototype.storePinsHit = function(frame) {
 };
 
 ScoreBoard.prototype.calculateSpareBonus = function(frame) {
-  if(this.FrameStatus == "Spare") {
+  if(this.frameHolder[this.frameHolder.length-1].isASpare()) {
     this.frameBonus.push(frame.rollHolder[0].hitPins);
-    console.log(this.frameBonus);
-
   }
 };
 
 ScoreBoard.prototype.updateScoreDisplay = function(frame) {
-  if(this.FrameStatus == "Strike") {
+  if(frame.isAStrike()) {
     this.displayScore = "X";
   }
-  else if (this.FrameStatus == "Spare") {
+  else if (frame.isASpare()) {
     this.displayScore = "/";
   }
   else {

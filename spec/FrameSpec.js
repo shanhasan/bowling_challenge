@@ -1,5 +1,7 @@
 describe("Frame", function() {
 
+  var frame, roll1, roll2;
+
   beforeEach(function() {
     frame = new Frame();
     roll1 = new Roll();
@@ -7,16 +9,16 @@ describe("Frame", function() {
   });
 
   it('should consist of two rolls', function() {
-      frame.storeRoll(roll1);
-      frame.storeRoll(roll2);
-      expect(frame.rollHolder.length).toEqual(2);
+    frame.storeRoll(roll1);
+    frame.storeRoll(roll2);
+    expect(frame.rollHolder.length).toEqual(2);
   });
 
   it('should automatically set the second roll to zero in the event of a strike', function() {
-      roll1.attempt(10);
-      frame.storeRoll(roll1);
-      expect(frame.rollHolder.length).toEqual(2);
-      expect(frame.rollHolder[1].hitPins).toEqual(0);
+    roll1.attempt(10);
+    frame.storeRoll(roll1);
+    expect(frame.rollHolder.length).toEqual(2);
+    expect(frame.rollHolder[1].hitPins).toEqual(0);
   });
 
   it('should know if it is a strike', function() {

@@ -1,13 +1,14 @@
 describe("Roll", function() {
 
+  var roll;
+
   beforeEach(function() {
     roll = new Roll();
   });
 
-   it('should range from 0-10 pins hit', function() {
+   it('should be able to store an attempt', function() {
       roll.attempt(5);
-      expect(roll.hitPins).toBeGreaterThan(-1); 
-      expect(roll.hitPins).toBeLessThan(11);
+      expect(roll.hitPins).toEqual(5);
     });
 
 });
