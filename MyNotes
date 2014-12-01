@@ -28,25 +28,9 @@ My Notes
   board.storeFrameStatus(frame);
   * (can now calculate any bonus for previous frame)
 
-
 - we need to calculate the basic points scored in this frame for the pins hit in this frame
 - we need to recognise this now and store it
 	board.storePinsHit(frame);
-
-<<<<<<< HEAD
-
-- we now need to see if a bonus should be calculated for the previous frame
-- i think that would be called after the next frame has been stored
-- i.e. where there is a * above
-
-=======
-- we need to calculate the basic points scored in this frame for the pins hit in this frame
-- these will need to be incremented if a bonus was awarded from the previous frame
-- we need to recognise this now and store it
-	board.storePinsHit(frame);
->>>>>>> 08b2f354a13c5b483d809edc63f02ca977b3312e
-
-
 
 - we should now consider if we can output that result now
 - i.e. if a bonus will apply, we technically shouldn't output
