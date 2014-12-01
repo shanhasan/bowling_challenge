@@ -11,7 +11,7 @@ describe("ScoreBoard", function() {
   });
 
   it('should should start out with zero points on the board', function() {
-    expect(board.score).toBe(0);
+    expect(board.cumulativeScore).toBe(0);
   });
 
   it('should be able to present the total score for normal frames', function() {
@@ -20,8 +20,8 @@ describe("ScoreBoard", function() {
     roll2.attempt(5);
     frame.storeRoll(roll2);
     board.storeFrame(frame);
-    board.calculateRunningTotal(frame);
-    expect(board.score).toEqual(7);
+    board.storePinsHit(frame);
+    expect(board.cumulativeScore).toEqual(7);
   });
 
   it('should recognise if a spare has been achieved', function() {
@@ -80,7 +80,7 @@ describe("ScoreBoard", function() {
     roll2.attempt(6);
     frame.storeRoll(roll2);
     board.storeFrame(frame);
-    board.calculateRunningTotal(frame);
+    board.storePinsHit(frame);
     board.storeFrameStatus(frame);
     board.updateScoreDisplay(frame);
     expect(board.displayScore).toEqual(7);
