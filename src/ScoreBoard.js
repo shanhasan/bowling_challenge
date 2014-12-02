@@ -2,7 +2,8 @@ function ScoreBoard() {
   this.frameHolder = new Array();
   // this.FrameStatus = "Normal";
   this.frameTotalPinsHit = new Array();
-  this.frameBonus = new Array();
+  this.frameBonusStrike = new Array();
+  this.frameBonusSpare = new Array();
   this.displayScore = 0;
   this.cumulativeScore = 0;
 };
@@ -17,22 +18,25 @@ ScoreBoard.prototype.storePinsHit = function(frame) {
   }
   else {
     this.frameTotalPinsHit.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
-    this.frameBonus.push(0);
+    this.frameBonusSpare.push(0);
+    this.frameBonusStrike.push(0);
     this.cumulativeScore = this.frameTotalPinsHit[this.frameTotalPinsHit.length-1] + this.cumulativeScore;
   }
 };
 
 ScoreBoard.prototype.calculateSpareBonus = function(frame) {
   if(this.frameHolder[this.frameHolder.length-1].isASpare()) {
-    this.frameBonus.push(frame.rollHolder[0].hitPins);
+    this.frameBonusSpare.push(frame.rollHolder[0].hitPins);
   }
 };
 
 ScoreBoard.prototype.calculateStrikeBonus = function(frame) {
   if(this.frameHolder[this.frameHolder.length-1].isAStrike()) {
-    this.frameBonus.push(frame.rollHolder[0].hitPins);
-    if(this.frameBonus.length > 1) {
-      this.frameBonus[this.frameBonus.length-2] = this.frameBonus[this.frameBonus.length-2] + frame.rollHolder[0].hitPins;
+    this.frameBonusStrike.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
+    if(frame.isAStrike()) {
+      if(this.frameBonusStrike.length > 1) {
+        this.frameBonusStrike[this.frameBonusStrike.length-2] = this.frameBonusStrike[this.frameBonusStrike.length-2] + frame.rollHolder[0].hitPins;
+      }
     }
   }
 };
