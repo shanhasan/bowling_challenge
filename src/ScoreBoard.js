@@ -33,10 +33,8 @@ ScoreBoard.prototype.calculateSpareBonus = function(frame) {
 ScoreBoard.prototype.calculateStrikeBonus = function(frame) {
   if(this.frameHolder[this.frameHolder.length-1].isAStrike()) {
     this.frameBonusStrike.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
-    if(frame.isAStrike()) {
-      if(this.frameBonusStrike.length > 1) {
-        this.frameBonusStrike[this.frameBonusStrike.length-2] = this.frameBonusStrike[this.frameBonusStrike.length-2] + frame.rollHolder[0].hitPins;
-      }
+    if(frame.isAStrike() && this.frameBonusStrike.length > 1) {
+      this.frameBonusStrike[this.frameBonusStrike.length-2] = this.frameBonusStrike[this.frameBonusStrike.length-2] + frame.rollHolder[0].hitPins;
     }
   }
 };
