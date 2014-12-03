@@ -1,6 +1,5 @@
 function ScoreBoard() {
   this.frameHolder = new Array();
-  // this.FrameStatus = "Normal";
   this.frameTotalPinsHit = new Array();
   this.frameBonusStrike = new Array();
   this.frameBonusSpare = new Array();
@@ -27,7 +26,10 @@ ScoreBoard.prototype.storePinsHit = function(frame) {
 ScoreBoard.prototype.calculateSpareBonus = function(frame) {
   if(this.frameHolder[this.frameHolder.length-1].isASpare()) {
     this.frameBonusSpare.push(frame.rollHolder[0].hitPins);
+  }else{
+    this.frameBonusSpare;
   }
+  console.log(this.frameBonusSpare);
 };
 
 ScoreBoard.prototype.calculateStrikeBonus = function(frame) {
@@ -36,7 +38,10 @@ ScoreBoard.prototype.calculateStrikeBonus = function(frame) {
     if(frame.isAStrike() && this.frameBonusStrike.length > 1) {
       this.frameBonusStrike[this.frameBonusStrike.length-2] = this.frameBonusStrike[this.frameBonusStrike.length-2] + frame.rollHolder[0].hitPins;
     }
+  }else{
+    this.frameBonusStrike;
   }
+    console.log(this.frameBonusStrike);
 };
 
 ScoreBoard.prototype.updateScoreDisplay = function(frame) {
