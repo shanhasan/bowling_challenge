@@ -23,25 +23,24 @@ ScoreBoard.prototype.storePinsHit = function(frame) {
   }
 };
 
-ScoreBoard.prototype.calculateSpareBonus = function(frame) {
+ScoreBoard.prototype.calculateBonus = function(frame) {
   if(this.frameHolder[this.frameHolder.length-1].isASpare()) {
-    this.frameBonusSpare.push(frame.rollHolder[0].hitPins);
-  }else{
-    this.frameBonusSpare;
+    calculateSpareBonus;
   }
-  console.log(this.frameBonusSpare);
+  if(this.frameHolder[this.frameHolder.length-1].isAStrike()) {
+    calculateStrikeBonus;
+  }
+};
+
+ScoreBoard.prototype.calculateSpareBonus = function(frame) {
+  this.frameBonusSpare.push(frame.rollHolder[0].hitPins);
 };
 
 ScoreBoard.prototype.calculateStrikeBonus = function(frame) {
-  if(this.frameHolder[this.frameHolder.length-1].isAStrike()) {
-    this.frameBonusStrike.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
-    if(frame.isAStrike() && this.frameBonusStrike.length > 1) {
-      this.frameBonusStrike[this.frameBonusStrike.length-2] = this.frameBonusStrike[this.frameBonusStrike.length-2] + frame.rollHolder[0].hitPins;
-    }
-  }else{
-    this.frameBonusStrike;
+  this.frameBonusStrike.push(frame.rollHolder[0].hitPins + frame.rollHolder[1].hitPins);
+  if(frame.isAStrike() && this.frameBonusStrike.length > 1) {
+    this.frameBonusStrike[this.frameBonusStrike.length-2] = this.frameBonusStrike[this.frameBonusStrike.length-2] + frame.rollHolder[0].hitPins;
   }
-    console.log(this.frameBonusStrike);
 };
 
 ScoreBoard.prototype.updateScoreDisplay = function(frame) {
